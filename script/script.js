@@ -14,24 +14,27 @@ function playSound2() {
 }
 
 function startTimer() {
-    isStretching = true;
-    timer = setInterval(function () {
-        document.getElementById("countdown").innerText = "Countdown: " + seconds + " Sekunden";
+    if (!isStretching) {
+        isStretching = true;
+        timer = setInterval(function () {
+            document.getElementById("countdown").innerText = "Countdown: " + seconds + " Sekunden";
 
-        if (seconds > 0) {
-            seconds--;
-        } else {
-            if (round % 2 !== 0) {
-                playSound1();
-                seconds = 30;
+            if (seconds > 0) {
+                seconds--;
             } else {
-                playSound2();
-                seconds = 10;
+                if (round % 2 !== 0) {
+                    playSound1();
+                    seconds = 30;
+                } else {
+                    playSound2();
+                    seconds = 10;
+                }
+                round++;
             }
-            round++;
-        }
 
-    }, 1000);
+        }, 1000);
+    }
+
 }
 
 function stopTimer() {
@@ -40,4 +43,5 @@ function stopTimer() {
     seconds = 10;
     round = 1;
     document.getElementById("countdown").innerText = "Stretching beendet!";
+    timer = null;
 }
