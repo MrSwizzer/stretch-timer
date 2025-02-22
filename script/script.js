@@ -3,6 +3,7 @@ let seconds = 10;
 let isStretching = false;
 let round = 1;
 let isMuted = false;
+let countdownType = '';
 
 function playSound1() {
 	if (!isMuted) {
@@ -22,7 +23,7 @@ function startTimer() {
 	if (!isStretching) {
 		isStretching = true;
 		timer = setInterval(function () {
-			document.getElementById('countdown').innerText = 'Countdown: ' + seconds + ' Sekunden';
+			document.getElementById('countdown').innerText = countdownType + ' Countdown: ' + seconds + ' Sekunden';
 
 			if (seconds > 0) {
 				seconds--;
@@ -30,9 +31,13 @@ function startTimer() {
 				if (round % 2 !== 0) {
 					playSound1();
 					seconds = 30;
+					document.body.style.backgroundColor = ' #ff8080';
+					countdownType = 'Stretch';
 				} else {
 					playSound2();
 					seconds = 10;
+					document.body.style.backgroundColor = ' #99ff99';
+					countdownType = 'Pause';
 				}
 				round++;
 			}
